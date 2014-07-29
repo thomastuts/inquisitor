@@ -29,6 +29,9 @@
     "karma-chai": "^0.1.0",
     "karma-mocha": "^0.1.6",
     "karma-phantomjs-launcher": "^0.1.4",
-    "mocha": "^1.21.3"
+    "mocha": "^1.21.3",
+    "lodash": "^2.4.1",
+    "run-sequence": "^0.3.6",
+    "gulp-karma": "0.0.4"
   }
 }
