@@ -25,14 +25,18 @@ angular.module('exampleApp', ['thomastuts.inquirer'])
     InquirerProvider.setExpressions([
       {
         keyword: 'age',
-        transform: 'number'
+        transform: 'number' // default transformer
       },
       {
         keyword: 'name',
-        transform: 'capitalized'
+        transform: 'capitalized' // default transformer
       },
       {
-        keyword: 'fruit'
+        keyword: 'foo' // no transform, use value as-is
+      },
+      {
+        keyword: 'fruit',
+        transform: 'bananas' // custom transformer
       }
     ]);
   });
@@ -43,7 +47,7 @@ angular.module('exampleApp', ['thomastuts.inquirer'])
 angular.module('exampleApp', ['thomastuts.inquirer'])
   .config(function (InquirerProvider) {
     InquirerProvider.addTransformer('bananas', function (input) {
-      return input + 'bananas';
+      return input + ' bananas';
     });
   });
 ```
@@ -55,7 +59,7 @@ Inject the `Inquirer` service in your service/controller/... and use it to parse
 // controller.js
 angular.module('exampleApp')
   .controller('ExampleCtrl', function (Inquirer) {
-    var searchString = 'age:50 name:"john doe" fruit:BANANA';
+    var searchString = 'age:50 name:"john doe" foo:BAR fruit:chiquita';
     var query = Inquirer.parse($scope.searchString);
   });
 ```
@@ -65,7 +69,8 @@ In this example, `query` would equal:
 {
   age: 50,
   name: 'John Doe',
-  fruit: 'BANANA'
+  foo: 'BAR',
+  fruit: 'chiquita bananas'
 }
 ```
 
