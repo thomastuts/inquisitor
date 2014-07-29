@@ -15,9 +15,14 @@ describe('Inquirer', function () {
           transform: 'capitalized'
         },
         {
-          keyword: 'foo'
+          keyword: 'foo',
+          transform: 'customTransform'
         }
       ]);
+
+      InquirerProvider.addTransformer('customTransform', function (input) {
+        return input.toUpperCase();
+      });
     });
 
     inject(function ($injector) {
@@ -126,6 +131,23 @@ describe('Inquirer', function () {
         output.should.deep.equal({
           foo: 'no_TraNsFoRm'
         });
+      });
+    });
+
+  });
+
+  describe('Custom transformers', function () {
+
+    it('should register custom transformers', function () {
+      Inquirer.transformers.customTransform.should.exist;
+    });
+
+    it.only('should transform values according to the given transformer', function () {
+      var input = 'foo:abcdef';
+      var output = Inquirer.parse(input);
+
+      output.should.deep.equal({
+        foo: 'ABCDEF'
       });
     });
 

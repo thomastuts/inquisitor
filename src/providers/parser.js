@@ -45,7 +45,9 @@ angular.module('thomastuts.inquirer')
 
     this.$get = function () {
       return {
-        parse: parse
+        parse: parse,
+        transformers: transformers,
+        expressions: declaredExpressions
       }
     };
 
