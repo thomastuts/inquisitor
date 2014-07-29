@@ -1,5 +1,5 @@
 describe('Inquirer', function () {
-  var InquirerProvider, Inquirer;
+  var Inquirer;
 
   beforeEach(function () {
     module('thomastuts.inquirer');
