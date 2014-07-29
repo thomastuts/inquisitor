@@ -1,4 +1,4 @@
-angular.module('thomastuts.inquirer')
+angular.module('thomastuts.inquirer', [])
   .provider('Inquirer', function () {
 
     var declaredExpressions = [];
