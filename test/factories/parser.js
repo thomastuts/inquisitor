@@ -1,11 +1,11 @@
-describe('SearchExpressionParser', function () {
-  var SearchExpressionParser;
+describe('Inquirer', function () {
+  var Inquirer;
 
   beforeEach(function () {
     module('thomastuts.inquirer');
 
     inject(function ($injector) {
-      SearchExpressionParser = $injector.get('SearchExpressionParser');
+      Inquirer = $injector.get('Inquirer');
     });
   });
 
@@ -13,7 +13,7 @@ describe('SearchExpressionParser', function () {
 
     it('should parse expressions by keyword', function () {
       var input = 'cost:5 rarity:epic';
-      var output = SearchExpressionParser(input);
+      var output = Inquirer.parse(input);
 
       output.should.deep.equal({
         cost: 5,
@@ -23,7 +23,7 @@ describe('SearchExpressionParser', function () {
 
     it('should parse wildcards', function () {
       var input = 'foo bar baz';
-      var output = SearchExpressionParser(input);
+      var output = Inquirer.parse(input);
 
       output.should.deep.equal({
         wildcard: 'foo bar baz'
@@ -32,7 +32,7 @@ describe('SearchExpressionParser', function () {
 
     it('should exclude keywords with no values', function () {
       var input = 'cost: rarity:epic';
-      var output = SearchExpressionParser(input);
+      var output = Inquirer.parse(input);
 
       output.should.deep.equal({
         rarity: 'Epic'
@@ -45,7 +45,7 @@ describe('SearchExpressionParser', function () {
 
     it('should parse expressions and a wildcard at the start of the input', function () {
       var input = 'foo bar baz cost:5 rarity:epic';
-      var output = SearchExpressionParser(input);
+      var output = Inquirer.parse(input);
 
       output.should.deep.equal({
         wildcard: 'foo bar baz',
@@ -56,7 +56,7 @@ describe('SearchExpressionParser', function () {
 
     it('should parse expressions and a wildcard in the middle of the input', function () {
       var input = 'cost:5 foo bar baz rarity:epic';
-      var output = SearchExpressionParser(input);
+      var output = Inquirer.parse(input);
 
       output.should.deep.equal({
         wildcard: 'foo bar baz',
@@ -67,7 +67,7 @@ describe('SearchExpressionParser', function () {
 
     it('should parse expressions and a wildcard at the end of the input', function () {
       var input = 'cost:5 rarity:epic foo bar baz';
-      var output = SearchExpressionParser(input);
+      var output = Inquirer.parse(input);
 
       output.should.deep.equal({
         wildcard: 'foo bar baz',

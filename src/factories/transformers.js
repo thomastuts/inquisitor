@@ -1,5 +1,5 @@
 angular.module('thomastuts.inquirer')
-  .factory('SearchExpressionTransformers', function () {
+  .factory('InquirerTransformers', function () {
 
     return {
       number: function (value) {

@@ -1,5 +1,5 @@
 angular.module('thomastuts.inquirer')
-  .factory('SearchExpressionParser', function (SearchExpressionTransformers) {
+  .factory('Inquirer', function (InquirerTransformers) {
 
     var availableExpressions = [
       {
@@ -14,7 +14,7 @@ angular.module('thomastuts.inquirer')
 
     var keywordRegex = /([A-Za-z\d_-]+):((".*?")|([A-Za-z\d_-]+))/gi;
 
-    return function (input) {
+    function parse (input) {
       var expressions = input.match(keywordRegex);
       var searchExpression = {};
 
@@ -26,7 +26,7 @@ angular.module('thomastuts.inquirer')
           var transform = _.find(availableExpressions, { keyword: keyword }).transform;
 
           if (value) {
-            searchExpression[keyword] = SearchExpressionTransformers[transform](value);
+            searchExpression[keyword] = InquirerTransformers[transform](value);
           }
 
           input = input.replace(expressions[i], '').trim();
@@ -41,6 +41,10 @@ angular.module('thomastuts.inquirer')
       }
 
       return searchExpression;
+    }
+
+    return {
+      parse: parse
     };
 
   });
