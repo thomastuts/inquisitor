@@ -25,11 +25,11 @@ angular.module('exampleApp', ['thomastuts.inquirer'])
     InquirerProvider.setExpressions([
       {
         keyword: 'age',
-        transform: 'number' // default transformer
+        transform: 'number' // preset transformer
       },
       {
         keyword: 'name',
-        transform: 'capitalized' // default transformer
+        transform: 'capitalized' // preset transformer
       },
       {
         keyword: 'foo' // no transform, use value as-is
