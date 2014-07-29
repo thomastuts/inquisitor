@@ -1,8 +1,24 @@
 describe('Inquirer', function () {
-  var Inquirer;
+  var InquirerProvider, Inquirer;
 
   beforeEach(function () {
     module('thomastuts.inquirer');
+
+    module(function (InquirerProvider) {
+      InquirerProvider.setExpressions([
+        {
+          keyword: 'cost',
+          transform: 'number'
+        },
+        {
+          keyword: 'rarity',
+          transform: 'capitalized'
+        },
+        {
+          keyword: 'foo'
+        }
+      ]);
+    });
 
     inject(function ($injector) {
       Inquirer = $injector.get('Inquirer');
@@ -76,6 +92,42 @@ describe('Inquirer', function () {
       });
     });
 
+  });
+
+  describe('Default transformers', function () {
+
+    describe('capitalize', function () {
+      it('should capitalize strings', function () {
+        var input = 'rarity:epIC';
+        var output = Inquirer.parse(input);
+
+        output.should.deep.equal({
+          rarity: 'Epic'
+        });
+      });
+    });
+
+    describe('number', function () {
+      it('should convert numbers', function () {
+        var input = 'cost:550';
+        var output = Inquirer.parse(input);
+
+        output.should.deep.equal({
+          cost: 550
+        });
+      });
+    });
+
+    describe('no transform', function () {
+      it('should not transform values if no transformer is found', function () {
+        var input = 'foo:no_TraNsFoRm';
+        var output = Inquirer.parse(input);
+
+        output.should.deep.equal({
+          foo: 'no_TraNsFoRm'
+        });
+      });
+    });
 
   });
 
