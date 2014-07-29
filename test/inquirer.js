@@ -63,6 +63,15 @@ describe('Inquirer', function () {
       });
     });
 
+    it('should parse quoted keywords', function () {
+      var input = 'rarity:"Quoted"';
+      var output = Inquirer.parse(input);
+
+      output.should.deep.equal({
+        rarity: 'Quoted'
+      });
+    });
+
   });
 
   describe('Combined parsing functionality', function () {
