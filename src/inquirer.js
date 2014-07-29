@@ -8,7 +8,21 @@ angular.module('thomastuts.inquirer', [])
         return parseInt(value);
       },
       capitalized: function (value) {
-        return _.str.capitalize(value.toLowerCase());
+        value = value.toLowerCase();
+
+        if (value.indexOf(' ') === -1) {
+          return value.charAt(0).toUpperCase() + value.slice(1);
+        }
+        else {
+          var words = value.split(' ');
+
+          for (var i = 0; i < words.length; i++) {
+            var word = words[i];
+            words[i] = word.charAt(0).toUpperCase() + word.slice(1);
+          }
+
+          return words.join(' ');
+        }
       }
     };
 

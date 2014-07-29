@@ -122,6 +122,15 @@ describe('Inquirer', function () {
           rarity: 'Epic'
         });
       });
+
+      it.only('should capitalize quoted strings', function () {
+        var input = 'rarity:"a quoted STRING"';
+        var output = Inquirer.parse(input);
+
+        output.should.deep.equal({
+          rarity: 'A Quoted String'
+        });
+      });
     });
 
     describe('number', function () {
