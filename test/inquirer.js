@@ -123,7 +123,7 @@ describe('Inquirer', function () {
         });
       });
 
-      it.only('should capitalize quoted strings', function () {
+      it('should capitalize quoted strings', function () {
         var input = 'rarity:"a quoted STRING"';
         var output = Inquirer.parse(input);
 
