@@ -15,7 +15,10 @@ describe('Inquirer', function () {
           transform: 'capitalized'
         },
         {
-          keyword: 'foo',
+          keyword: 'noTransform'
+        },
+        {
+          keyword: 'custom',
           transform: 'customTransform'
         }
       ]);
@@ -125,11 +128,11 @@ describe('Inquirer', function () {
 
     describe('no transform', function () {
       it('should not transform values if no transformer is found', function () {
-        var input = 'foo:no_TraNsFoRm';
+        var input = 'noTransform:no_TraNsFoRm';
         var output = Inquirer.parse(input);
 
         output.should.deep.equal({
-          foo: 'no_TraNsFoRm'
+          noTransform: 'no_TraNsFoRm'
         });
       });
     });
@@ -142,12 +145,12 @@ describe('Inquirer', function () {
       Inquirer.transformers.customTransform.should.exist;
     });
 
-    it.only('should transform values according to the given transformer', function () {
-      var input = 'foo:abcdef';
+    it('should transform values according to the given transformer', function () {
+      var input = 'custom:abcdef';
       var output = Inquirer.parse(input);
 
       output.should.deep.equal({
-        foo: 'ABCDEF'
+        custom: 'ABCDEF'
       });
     });
 

@@ -1,7 +1,7 @@
 angular.module('thomastuts.inquirer', [])
   .provider('Inquirer', function () {
 
-    var declaredExpressions = [];
+    var declaredExpressions = {};
 
     var transformers = {
       number: function (value) {
@@ -23,7 +23,7 @@ angular.module('thomastuts.inquirer', [])
           var expression = expressions[i].split(':');
           var keyword = expression[0];
           var value = expression[1].replace('"', '');
-          var transform = _.find(declaredExpressions, { keyword: keyword }).transform;
+          var transform = declaredExpressions[keyword];
 
           if (value) {
             searchExpression[keyword] = transform ? transformers[transform](value) : value;
@@ -56,6 +56,9 @@ angular.module('thomastuts.inquirer', [])
     };
 
     this.setExpressions = function (expressions) {
-      declaredExpressions = expressions;
+      for (var i = 0; i < expressions.length; i++) {
+        var expression = expressions[i];
+        declaredExpressions[expression.keyword] = expression.transform;
+      }
     };
   });
