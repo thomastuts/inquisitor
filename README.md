@@ -83,17 +83,17 @@ The returned result in this example would be:
 ```
 
 ## API
-#### `Inquirer.addExpressionSet(expressionName, expressionSet)`
+#### `Inquirer.addExpressionSet(name, expressionSet)`
 Parameter      | Type          | Details
 -------------- | ------------- |-------------
-expressionName | String        | Used to identify which expression set to use when parsing a search string.
+name           | String        | Used to identify which expression set to use when parsing a search string.
 expressionSet  | Array         | A collection of expressions, with a required `keyword` property and an optional `transformer` property.
 
-#### `Inquirer.addTransformer(transformerName, transformerFunction)`
+#### `Inquirer.addTransformer(name, transformer)`
 Parameter      | Type          | Details
 -------------- | ------------- |-------------
-expressionName | String        | Used to identify the transformer.
-expressionSet  | Function      | An anonymous function that takes one argument (the value), transforms it and then returns it.
+name           | String        | Used to identify the transformer.
+transformer    | Function      | An anonymous function that takes one argument (the value), transforms it and then returns it.
 
 ## License
 
