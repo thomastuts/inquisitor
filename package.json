@@ -1,7 +1,7 @@
 {
   "name": "inquirer",
   "version": "0.0.1",
-  "description": "inquirer ================",
+  "description": "Inquirer extracts expressions from a Gmail-like search string.",
   "main": "index.js",
   "directories": {
     "test": "test"
