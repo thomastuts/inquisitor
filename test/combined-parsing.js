@@ -1,6 +1,6 @@
 describe('Combined parsing functionality', function () {
 
-  Inquirer.setExpressionSet([
+  Inquirer.addExpressionSet('combinedParsing', [
     {
       keyword: 'foo',
       transform: 'number'
@@ -16,7 +16,7 @@ describe('Combined parsing functionality', function () {
 
   it('should parse expressions and a wildcard at the start of the input', function () {
     var input = 'some random words foo:5 bar:banana';
-    var output = Inquirer.parse(input);
+    var output = Inquirer.parse('combinedParsing', input);
 
     output.should.deep.equal({
       wildcard: 'some random words',
@@ -27,7 +27,7 @@ describe('Combined parsing functionality', function () {
 
   it('should parse expressions and a wildcard in the middle of the input', function () {
     var input = 'foo:5 some random words bar:banana';
-    var output = Inquirer.parse(input);
+    var output = Inquirer.parse('combinedParsing', input);
 
     output.should.deep.equal({
       wildcard: 'some random words',
@@ -38,7 +38,7 @@ describe('Combined parsing functionality', function () {
 
   it('should parse expressions and a wildcard at the end of the input', function () {
     var input = 'foo:5 bar:banana some random words';
-    var output = Inquirer.parse(input);
+    var output = Inquirer.parse('combinedParsing', input);
 
     output.should.deep.equal({
       wildcard: 'some random words',

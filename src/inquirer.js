@@ -1,7 +1,7 @@
 (function () {
   var Inquirer = {};
 
-  var declaredExpressions = {};
+  var expressionSets = {};
 
   var transformers = {
     number: function (value) {
@@ -28,7 +28,7 @@
 
   var keywordRegex = /([A-Za-z\d_-]+):((".*?")|([A-Za-z\d_-]+))/gi;
 
-  function parse (input) {
+  function parse (expressionSet, input) {
     var expressions = input.match(keywordRegex);
     var searchExpression = {};
 
@@ -37,7 +37,7 @@
         var expression = expressions[i].split(':');
         var keyword = expression[0];
         var value = expression[1].replace(/"/g, '');
-        var transform = declaredExpressions[keyword];
+        var transform = expressionSets[expressionSet][keyword];
 
         if (value) {
           searchExpression[keyword] = transform ? transformers[transform](value) : value;
@@ -47,7 +47,7 @@
       }
     }
 
-    // Strip any keywords out that have a null value
+    // Remove any keywords without a value from the remaining string
     input = input.replace(/([A-Za-z\d_-]+):/gi, '').trim();
 
     if (input) {
@@ -61,10 +61,12 @@
     transformers[name] = transformer;
   };
 
-  Inquirer.setExpressionSet = function (expressionSet) {
+  Inquirer.addExpressionSet = function (name, expressionSet) {
+    expressionSets[name] = {};
+
     for (var i = 0; i < expressionSet.length; i++) {
       var expression = expressionSet[i];
-      declaredExpressions[expression.keyword] = expression.transform || null;
+      expressionSets[name][expression.keyword] = expression.transform || null;
     }
   };
 
