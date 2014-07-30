@@ -54,7 +54,7 @@ Inquirer.addExpressionSet('myFirstExpressionSet', [
   }
 ]);
 ```
-> Expressions are contained in *expression sets*. This way we can define multiple batches of keywords, allowing us to parse multiple versions of search strings.
+Expressions are contained in *expression sets*. This way we can define multiple batches of keywords, allowing us to parse multiple versions of search strings.
 
 #### Adding custom transformers
 As mentioned before, you can optionally transform expression values when they are added to the Inquirer result. This is handy for turning values into numbers, capitalizing them, ...
@@ -63,7 +63,7 @@ Inquirer.addTransformer('bananas', function (input) {
   return input + ' bananas';
 });
 ```
-> In this example, any keyword that uses the custom `bananas` transformer will have `' bananas'` appended to its value. 
+In this example, any keyword that uses the custom `bananas` transformer will have `' bananas'` appended to its value. 
 
 ### Parsing expressions
 Use `Inquirer.parse()` method to parse your search strings and get the result. 
@@ -83,13 +83,13 @@ The returned result in this example would be:
 ```
 
 ## API
-### `Inquirer.addExpressionSet(expressionName, expressionSet)`
+#### `Inquirer.addExpressionSet(expressionName, expressionSet)`
 Parameter      | Type          | Details
 -------------- | ------------- |-------------
 expressionName | String        | Used to identify which expression set to use when parsing a search string.
 expressionSet  | Array         | A collection of expressions, with a required `keyword` property and an optional `transformer` property.
 
-### `Inquirer.addTransformer(transformerName, transformerFunction)`
+#### `Inquirer.addTransformer(transformerName, transformerFunction)`
 Parameter      | Type          | Details
 -------------- | ------------- |-------------
 expressionName | String        | Used to identify the transformer.
