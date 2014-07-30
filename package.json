@@ -22,14 +22,12 @@
   "devDependencies": {
     "chai": "^1.9.1",
     "gulp": "^3.8.6",
-    "gulp-ng-annotate": "^0.2.0",
     "gulp-rename": "^1.2.0",
     "gulp-uglify": "^0.3.1",
     "karma": "^0.12.19",
     "karma-chai": "^0.1.0",
     "karma-mocha": "^0.1.6",
     "karma-phantomjs-launcher": "^0.1.4",
-    "mocha": "^1.21.3",
     "lodash": "^2.4.1",
     "run-sequence": "^0.3.6",
     "gulp-karma": "0.0.4"

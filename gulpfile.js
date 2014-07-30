@@ -1,11 +1,8 @@
 var gulp = require('gulp');
-var annotate = require('gulp-ng-annotate');
 var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
-var _ = require('lodash');
 var karma = require('gulp-karma');
 var runSequence =  require('run-sequence');
-var karmaConfig = require('./karma.conf');
 
 var paths = {
   inquirer: 'src/inquirer.js',
@@ -26,13 +23,11 @@ gulp.task('test', function() {
 
 gulp.task('inquirer-dist', function () {
   return gulp.src(paths.inquirer)
-    .pipe(annotate())
     .pipe(gulp.dest(paths.dist));
 });
 
 gulp.task('inquirer-min-dist', function () {
   return gulp.src(paths.inquirer)
-    .pipe(annotate())
     .pipe(uglify())
     .pipe(rename({
       basename: 'inquirer.min'
