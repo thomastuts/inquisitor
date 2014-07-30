@@ -36,11 +36,14 @@
       for (var i = 0; i < expressions.length; i++) {
         var expression = expressions[i].split(':');
         var keyword = expression[0];
-        var value = expression[1].replace(/"/g, '');
-        var transform = expressionSets[expressionSet][keyword];
 
-        if (value) {
-          searchExpression[keyword] = transform ? transformers[transform](value) : value;
+        if (keyword in expressionSets[expressionSet]) {
+          var value = expression[1].replace(/"/g, '');
+          var transform = expressionSets[expressionSet][keyword];
+
+          if (value) {
+            searchExpression[keyword] = transform ? transformers[transform](value) : value;
+          }
         }
 
         input = input.replace(expressions[i], '').trim();

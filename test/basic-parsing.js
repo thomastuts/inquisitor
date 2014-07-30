@@ -33,6 +33,15 @@ describe('Basic parsing functionality', function () {
     });
   });
 
+  it.only('should exclude undefined keywords', function () {
+    var input = 'bar:banana notdefined:something';
+    var output = Inquirer.parse('basicParsing', input);
+
+    output.should.deep.equal({
+      bar: 'Banana'
+    });
+  });
+
   it('should exclude keywords with no values', function () {
     var input = 'foo: bar:banana';
     var output = Inquirer.parse('basicParsing', input);
