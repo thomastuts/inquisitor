@@ -1,7 +1,7 @@
 {
-  "name": "angular-inquirer",
+  "name": "inquirer",
   "version": "0.0.1",
-  "description": "angular-inquirer ================",
+  "description": "inquirer ================",
   "main": "index.js",
   "directories": {
     "test": "test"
@@ -11,14 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/thomastuts/angular-inquirer.git"
+    "url": "https://github.com/thomastuts/inquirer.git"
   },
   "author": "Thomas Tuts",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/thomastuts/angular-inquirer/issues"
+    "url": "https://github.com/thomastuts/inquirer/issues"
   },
-  "homepage": "https://github.com/thomastuts/angular-inquirer",
+  "homepage": "https://github.com/thomastuts/inquirer",
   "devDependencies": {
     "chai": "^1.9.1",
     "gulp": "^3.8.6",

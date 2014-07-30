@@ -1,7 +1,7 @@
 {
-  "name": "angular-inquirer",
+  "name": "inquirer",
   "version": "0.0.1",
-  "homepage": "https://github.com/thomastuts/angular-inquirer",
+  "homepage": "https://github.com/thomastuts/inquirer",
   "authors": [
     "Thomas Tuts <thomas.tuts@gmail.com>"
   ],
