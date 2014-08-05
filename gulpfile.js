@@ -5,7 +5,7 @@ var karma = require('gulp-karma');
 var runSequence =  require('run-sequence');
 
 var paths = {
-  inquirer: 'src/inquirer.js',
+  inquisitor: 'src/inquisitor.js',
   dist: 'dist/'
 };
 
@@ -21,22 +21,22 @@ gulp.task('test', function() {
     });
 });
 
-gulp.task('inquirer-dist', function () {
-  return gulp.src(paths.inquirer)
+gulp.task('inquisitor-dist', function () {
+  return gulp.src(paths.inquisitor)
     .pipe(gulp.dest(paths.dist));
 });
 
-gulp.task('inquirer-min-dist', function () {
-  return gulp.src(paths.inquirer)
+gulp.task('inquisitor-min-dist', function () {
+  return gulp.src(paths.inquisitor)
     .pipe(uglify())
     .pipe(rename({
-      basename: 'inquirer.min'
+      basename: 'inquisitor.min'
     }))
     .pipe(gulp.dest(paths.dist));
 });
 
 gulp.task('build', function (callback) {
-  runSequence('test', ['inquirer-dist', 'inquirer-min-dist'], callback)
+  runSequence('test', ['inquisitor-dist', 'inquisitor-min-dist'], callback)
 });
 
 gulp.task('default', ['build']);

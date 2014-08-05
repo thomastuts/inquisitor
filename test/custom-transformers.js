@@ -1,10 +1,10 @@
 describe('Custom transformers', function () {
 
-  Inquirer.addTransformer('customTransform', function (input) {
+  Inquisitor.addTransformer('customTransform', function (input) {
     return input.toUpperCase();
   });
 
-  Inquirer.addExpressionSet('customTransformers', [
+  Inquisitor.addExpressionSet('customTransformers', [
     {
       keyword: 'custom',
       transform: 'customTransform'
@@ -13,7 +13,7 @@ describe('Custom transformers', function () {
 
   it('should transform values with a custom transformer', function () {
     var input = 'custom:abcdef';
-    var output = Inquirer.parse('customTransformers', input);
+    var output = Inquisitor.parse('customTransformers', input);
 
     output.should.deep.equal({
       custom: 'ABCDEF'

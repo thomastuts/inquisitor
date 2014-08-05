@@ -1,5 +1,5 @@
 (function () {
-  var Inquirer = {};
+  var Inquisitor = {};
 
   var expressionSets = {};
 
@@ -60,11 +60,11 @@
     return searchExpression;
   }
 
-  Inquirer.addTransformer = function (name, transformer) {
+  Inquisitor.addTransformer = function (name, transformer) {
     transformers[name] = transformer;
   };
 
-  Inquirer.addExpressionSet = function (name, expressionSet) {
+  Inquisitor.addExpressionSet = function (name, expressionSet) {
     expressionSets[name] = {};
 
     for (var i = 0; i < expressionSet.length; i++) {
@@ -73,7 +73,7 @@
     }
   };
 
-  Inquirer.parse = parse;
+  Inquisitor.parse = parse;
 
-  window.Inquirer = Inquirer;
+  window.Inquisitor = Inquisitor;
 })();

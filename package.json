@@ -1,7 +1,7 @@
 {
-  "name": "inquirer",
+  "name": "inquisitor",
   "version": "0.0.1",
-  "description": "Inquirer extracts expressions from a Gmail-like search string.",
+  "description": "Inquisitor extracts expressions from a Gmail-like search string.",
   "main": "index.js",
   "directories": {
     "test": "test"
@@ -11,14 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/thomastuts/inquirer.git"
+    "url": "https://github.com/thomastuts/inquisitor.git"
   },
   "author": "Thomas Tuts",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/thomastuts/inquirer/issues"
+    "url": "https://github.com/thomastuts/inquisitor/issues"
   },
-  "homepage": "https://github.com/thomastuts/inquirer",
+  "homepage": "https://github.com/thomastuts/inquisitor",
   "devDependencies": {
     "chai": "^1.9.1",
     "gulp": "^3.8.6",

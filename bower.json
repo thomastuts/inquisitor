@@ -1,9 +1,9 @@
 {
-  "name": "inquirer",
-  "description": "Inquirer extracts expressions from a Gmail-like search string.",
+  "name": "inquisitor",
+  "description": "Inquisitor extracts expressions from a Gmail-like search string.",
   "version": "0.0.1",
-  "main": "dist/inquirer.js",
-  "homepage": "https://github.com/thomastuts/inquirer",
+  "main": "dist/inquisitor.js",
+  "homepage": "https://github.com/thomastuts/inquisitor",
   "authors": [
     "Thomas Tuts <thomas.tuts@gmail.com>"
   ],
