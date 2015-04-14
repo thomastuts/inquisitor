@@ -33,7 +33,7 @@ describe('Basic parsing functionality', function () {
     });
   });
 
-  it.only('should exclude undefined keywords', function () {
+  it('should exclude undefined keywords', function () {
     var input = 'bar:banana notdefined:something';
     var output = Inquisitor.parse('basicParsing', input);
 
