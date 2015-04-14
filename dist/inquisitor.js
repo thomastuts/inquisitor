@@ -26,7 +26,7 @@
     }
   };
 
-  var keywordRegex = /([A-Za-z\d_-]+):((".*?")|([A-Za-z\d_-]+))/gi;
+  var keywordRegex = /([A-Za-z\d_-]+):((".*?")|([A-Za-z\d_\-/]+))/gi;
 
   function parse (expressionSet, input) {
     var expressions = input.match(keywordRegex);
