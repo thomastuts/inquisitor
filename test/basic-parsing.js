@@ -24,6 +24,15 @@ describe('Basic parsing functionality', function () {
     });
   });
 
+  it('should handle non-alphabetical characters correctly', function () {
+    var input = 'baz:/banana';
+    var output = Inquisitor.parse('basicParsing', input);
+
+    output.should.deep.equal({
+      baz: '/banana'
+    });
+  });
+
   it('should parse wildcards', function () {
     var input = 'some random words';
     var output = Inquisitor.parse('basicParsing', input);
