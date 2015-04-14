@@ -69,7 +69,7 @@ In this example, any keyword that uses the custom `bananas` transformer will hav
 Use `Inquisitor.parse()` method to parse your search strings and get the result.
 
 ```js
-Inquisitor.parse('myFirstExpressionSet, 'age:50 name:"john doe" foo:BAR fruit:chiquita');
+Inquisitor.parse('myFirstExpressionSet', 'age:50 name:"john doe" foo:BAR fruit:chiquita');
 ```
 The returned result in this example would be:
 
