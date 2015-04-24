@@ -24,6 +24,15 @@ describe('Basic parsing functionality', function () {
     });
   });
 
+  it('should handle colons in an expression value', function () {
+    var input = 'baz:one:two';
+    var output = Inquisitor.parse('basicParsing', input);
+
+    output.should.deep.equal({
+      baz: 'one:two'
+    });
+  });
+
   it('should handle non-alphabetical characters correctly', function () {
     var input = 'baz:/banana';
     var output = Inquisitor.parse('basicParsing', input);

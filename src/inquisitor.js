@@ -26,19 +26,20 @@
     }
   };
 
-  var keywordRegex = /([A-Za-z\d_-]+):((".*?")|([A-Za-z\d_\-/]+))/gi;
+  var keywordRegex = /([A-Za-z\d_-]+):((".*?")|([A-Za-z\d_\-/:]+))/gi;
 
   function parse (expressionSet, input) {
     var expressions = input.match(keywordRegex);
+    console.log(expressions);
     var searchExpression = {};
 
     if (expressions) {
       for (var i = 0; i < expressions.length; i++) {
         var expression = expressions[i].split(':');
-        var keyword = expression[0];
+        var keyword = expression.shift();
 
         if (keyword in expressionSets[expressionSet]) {
-          var value = expression[1].replace(/"/g, '');
+          var value = expression.join(':').replace(/"/g, '');
           var transform = expressionSets[expressionSet][keyword];
 
           if (value) {
