@@ -30,7 +30,6 @@
 
   function parse (expressionSet, input) {
     var expressions = input.match(keywordRegex);
-    console.log(expressions);
     var searchExpression = {};
 
     if (expressions) {
