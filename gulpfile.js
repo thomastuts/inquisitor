@@ -39,4 +39,6 @@ gulp.task('build', function (callback) {
   runSequence('test', ['inquisitor-dist', 'inquisitor-min-dist'], callback)
 });
 
+gulp.task('bundle', require('./tasks/bundle'));
+
 gulp.task('default', ['build']);
