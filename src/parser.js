@@ -14,7 +14,19 @@ class Parser {
 
   parse(input) {
     var expressions = input.match(KEYWORD_REGEX);
-    return expressions;
+    var result = {};
+
+    if (expressions) {
+      for (var i = 0; i < expressions.length; i++) {
+        var expression = expressions[i].split(':');
+        var keyword = expression.shift();
+        var value = expression.join(':').replace(/"/g, '');
+
+        result[keyword] = value;
+      }
+    }
+
+    return result;
   }
 }
 
