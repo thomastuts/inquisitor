@@ -22,7 +22,9 @@ class Parser {
         var keyword = expression.shift();
         var value = expression.join(':').replace(/"/g, '');
 
-        result[keyword] = value;
+        if (value) {
+          result[keyword] = value;
+        }
       }
     }
 
