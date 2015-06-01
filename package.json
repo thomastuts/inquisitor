@@ -20,8 +20,7 @@
   },
   "homepage": "https://github.com/thomastuts/inquisitor",
   "devDependencies": {
-    "gulp": "^3.8.6",
-    "babelify": "^6.0.2",
+    "babelify": "^6.1.2",
     "browserify": "^9.0.8",
     "gulp": "^3.8.11",
     "gulp-sourcemaps": "^1.5.2",

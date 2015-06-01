@@ -1,13 +1,9 @@
 'use strict';
 
-function Inquisitor() {
-  this.transforms.sayHello();
-}
+import Parser from './parser';
 
-Inquisitor.prototype.transforms = {
-  sayHello: function () {
-    console.log('Hello!');
+module.exports = {
+  createParser(options) {
+    return new Parser(options);
   }
 };
-
-module.exports = Inquisitor;
