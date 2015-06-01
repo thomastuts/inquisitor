@@ -22,9 +22,18 @@
   "devDependencies": {
     "babelify": "^6.1.2",
     "browserify": "^9.0.8",
+    "chai": "^2.3.0",
     "gulp": "^3.8.11",
     "gulp-sourcemaps": "^1.5.2",
     "gulp-util": "^3.0.4",
+    "karma": "^0.12.35",
+    "karma-babel-preprocessor": "^5.2.1",
+    "karma-browserify": "^4.2.1",
+    "karma-chai": "^0.1.0",
+    "karma-mocha": "^0.1.10",
+    "karma-phantomjs-launcher": "^0.2.0",
+    "mocha": "^2.2.5",
+    "phantomjs": "^1.9.17",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.2.0"
