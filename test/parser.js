@@ -2,8 +2,12 @@
 
 var Inquisitor = require('../src/index');
 
-describe('testing', function () {
-  it('should do something', function () {
-    (5).should.equal(5);
+describe('Initialization', function () {
+  it('should throw an error if no keywords are given and not all keywords are allowed', function () {
+    (function () {
+      Inquisitor.createParser({
+        allowAllKeywords: false
+      });
+    }).should.throw();
   });
 });
