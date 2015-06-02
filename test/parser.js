@@ -6,7 +6,7 @@ describe('Initialization', function () {
   it('should throw an error if no keywords are given and not all keywords are allowed', function () {
     (function () {
       Inquisitor.createParser({
-        allowAllKeywords: false
+        allowAllKeys: false
       });
     }).should.throw();
   });
@@ -15,12 +15,12 @@ describe('Initialization', function () {
 describe('Basic parsing', function () {
   beforeEach(function () {
     this.parser = Inquisitor.createParser({
-      keywords: [
+      pairs: [
         {
-          keyword: 'foo'
+          key: 'foo'
         },
         {
-          keyword: 'bar'
+          key: 'bar'
         }
       ]
     });
@@ -77,10 +77,10 @@ describe('Keyword-specific options', function () {
   describe('multiple', function () {
     beforeEach(function () {
       this.parser = Inquisitor.createParser({
-        keywords: [
+        pairs: [
           {
-            keyword: 'foo',
-            multiple: true
+            key: 'foo',
+            multipleValues: true
           }
         ]
       });

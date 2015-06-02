@@ -5,17 +5,17 @@ const KEY_VALUE_PAIR_REGEX = /\S+:("[^"]+"|\S+)/g;
 class Parser {
   constructor(options) {
 
-    if (!options.keywords && !options.allowAllKeywords) {
-      throw new Error('No keywords defined, either define keywords or allow all of them with `allowAllKeywords`');
+    if (!options.pairs && !options.allowAllKeys) {
+      throw new Error('No keys defined, either define pairs or allow all of them with `allowAllKeys`');
     }
 
     this.options = options;
   }
 
-  getOptionsForKey(keyword) {
-    for (var i = 0; i < this.options.keywords.length; i++) {
-      var keywordOptions = this.options.keywords[i];
-      if (keywordOptions.keyword === keyword) {
+  getOptionsForKey(key) {
+    for (var i = 0; i < this.options.pairs.length; i++) {
+      var keywordOptions = this.options.pairs[i];
+      if (keywordOptions.key === key) {
         return keywordOptions;
       }
     }
@@ -29,11 +29,11 @@ class Parser {
       for (var i = 0; i < keyValuePairs.length; i++) {
         var expression = keyValuePairs[i].split(':');
         var key = expression.shift();
-        var keywordOptions = this.getOptionsForKey(key);
+        var pairOptions = this.getOptionsForKey(key);
         var value = expression.join(':').replace(/"/g, '');
 
-        if (value && (keywordOptions || this.options.allowAllKeywords)) {
-          if (keywordOptions.multiple) {
+        if (value && (pairOptions || this.options.allowAllKeys)) {
+          if (pairOptions.multipleValues) {
             if (!result[key]) {
               result[key] = [];
             }
