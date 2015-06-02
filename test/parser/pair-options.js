@@ -2,7 +2,7 @@
 
 var Inquisitor = require('../../src/index');
 
-describe('Options', function () {
+describe('Pair options', function () {
   describe('multipleValues', function () {
     beforeEach(function () {
       this.parser = Inquisitor.createParser({
