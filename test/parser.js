@@ -62,13 +62,4 @@ describe('Basic parsing', function () {
       bar: 'banana'
     });
   });
-
-  it('should handle values with spaces if the value has quotes', function () {
-    var input = 'foo:"quoted string"';
-    var output = this.parser.parse(input);
-
-    output.should.deep.equal({
-      foo: 'quoted string'
-    });
-  });
 });

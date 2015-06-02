@@ -1,7 +1,5 @@
 'use strict';
 
-const KEYWORD_REGEX = /([A-Za-z\d_-]+):((".*?")|([A-Za-z\d_\-/:]+))/gi;
-
 class Parser {
   constructor(options) {
 
@@ -13,17 +11,17 @@ class Parser {
   }
 
   parse(input) {
-    var expressions = input.match(KEYWORD_REGEX);
+    var keyValuePairs = input.split(' ');
     var result = {};
 
-    if (expressions) {
-      for (var i = 0; i < expressions.length; i++) {
-        var expression = expressions[i].split(':');
-        var keyword = expression.shift();
+    if (keyValuePairs) {
+      for (var i = 0; i < keyValuePairs.length; i++) {
+        var expression = keyValuePairs[i].split(':');
+        var key = expression.shift();
         var value = expression.join(':').replace(/"/g, '');
 
         if (value) {
-          result[keyword] = value;
+          result[key] = value;
         }
       }
     }
