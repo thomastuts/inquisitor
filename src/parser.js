@@ -10,6 +10,15 @@ class Parser {
     this.options = options;
   }
 
+  getOptionsForKey(keyword) {
+    for (var i = 0; i < this.options.keywords.length; i++) {
+      var keywordOptions = this.options.keywords[i];
+      if (keywordOptions.keyword === keyword) {
+        return keywordOptions;
+      }
+    }
+  }
+
   parse(input) {
     var keyValuePairs = input.split(' ');
     var result = {};
@@ -18,10 +27,19 @@ class Parser {
       for (var i = 0; i < keyValuePairs.length; i++) {
         var expression = keyValuePairs[i].split(':');
         var key = expression.shift();
+        var keywordOptions = this.getOptionsForKey(key);
         var value = expression.join(':').replace(/"/g, '');
 
-        if (value) {
-          result[key] = value;
+        if (value && (keywordOptions || this.options.allowAllKeywords)) {
+          if (keywordOptions.multiple) {
+            if (!result[key]) {
+              result[key] = [];
+            }
+            result[key].push(value);
+          }
+          else {
+            result[key] = value;
+          }
         }
       }
     }

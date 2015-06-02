@@ -63,3 +63,27 @@ describe('Basic parsing', function () {
     });
   });
 });
+
+describe('Keyword-specific options', function () {
+  describe('multiple', function () {
+    beforeEach(function () {
+      this.parser = Inquisitor.createParser({
+        keywords: [
+          {
+            keyword: 'foo',
+            multiple: true
+          }
+        ]
+      });
+    });
+
+    it('should add multiple values to a key if the option is set to true', function () {
+      var input = 'foo:one bar:baz foo:two';
+      var output = this.parser.parse(input);
+
+      output.should.deep.equal({
+        foo: ['one', 'two']
+      });
+    });
+  });
+});
