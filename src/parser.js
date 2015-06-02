@@ -1,5 +1,7 @@
 'use strict';
 
+const KEY_VALUE_PAIR_REGEX = /\S+:("[^"]+"|\S+)/g;
+
 class Parser {
   constructor(options) {
 
@@ -20,7 +22,7 @@ class Parser {
   }
 
   parse(input) {
-    var keyValuePairs = input.split(' ');
+    var keyValuePairs = input.match(KEY_VALUE_PAIR_REGEX);
     var result = {};
 
     if (keyValuePairs) {

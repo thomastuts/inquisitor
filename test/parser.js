@@ -62,6 +62,15 @@ describe('Basic parsing', function () {
       bar: 'banana'
     });
   });
+
+  it('should include a quoted string in its entirety', function () {
+    var input = 'foo:"quoted string"';
+    var output = this.parser.parse(input);
+
+    output.should.deep.equal({
+      foo: 'quoted string'
+    });
+  });
 });
 
 describe('Keyword-specific options', function () {
