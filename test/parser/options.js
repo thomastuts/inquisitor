@@ -10,6 +10,9 @@ describe('Options', function () {
           {
             key: 'foo',
             multipleValues: true
+          },
+          {
+            key: 'bar'
           }
         ]
       });
@@ -20,7 +23,18 @@ describe('Options', function () {
       var output = this.parser.parse(input);
 
       output.should.deep.equal({
-        foo: ['one', 'two']
+        foo: ['one', 'two'],
+        bar: 'baz'
+      });
+    });
+
+    it('should take the last value from a key/value pair if the pair is not using multiple values', function () {
+      var input = 'foo:one bar:baz bar:banana foo:two';
+      var output = this.parser.parse(input);
+
+      output.should.deep.equal({
+        foo: ['one', 'two'],
+        bar: 'banana'
       });
     });
   });
