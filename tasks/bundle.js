@@ -1,40 +1,30 @@
 'use strict';
 
 var gulp = require('gulp');
+var gulpIf = require('gulp-if');
+var uglify = require('gulp-uglify');
 var browserify = require('browserify');
-var watchify = require('watchify');
 var babelify = require('babelify');
 var source = require('vinyl-source-stream');
 var buffer = require('vinyl-buffer');
-var sourcemaps = require('gulp-sourcemaps');
-var assign = require('lodash/object/assign');
 var gutil = require('gulp-util');
 
-var customOpts = {
+var b = browserify({
   entries: ['./src/index.js'],
   debug: true,
   standalone: 'Inquisitor'
-};
-var opts = assign({}, watchify.args, customOpts);
-var b = watchify(browserify(opts));
+});
 
 b.transform(babelify);
-
-b.on('update', bundle); // on any dep update, runs the bundler
 b.on('log', gutil.log); // output build logs to terminal
 
-function bundle() {
-  return b.bundle()
-    // log errors if they happen
-    .on('error', gutil.log.bind(gutil, 'Browserify Error'))
-    .pipe(source('bundle.js'))
-    // optional, remove if you don't need to buffer file contents
-    .pipe(buffer())
-    // optional, remove if you dont want sourcemaps
-    .pipe(sourcemaps.init({loadMaps: true})) // loads map from browserify file
-    // Add transformation tasks to the pipeline here.
-    .pipe(sourcemaps.write('./')) // writes .map file
-    .pipe(gulp.dest('./dist'));
-}
+module.exports = function (minified) {
+  var filename = minified ? 'bundle.min.js' : 'bundle.js';
 
-module.exports = bundle;
+  return b.bundle()
+    .on('error', gutil.log.bind(gutil, 'Browserify Error'))
+    .pipe(source(filename))
+    .pipe(buffer())
+    .pipe(gulpIf(minified, uglify()))
+    .pipe(gulp.dest('./dist'));
+};

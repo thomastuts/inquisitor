@@ -1,4 +1,15 @@
 var gulp = require('gulp');
 
-gulp.task('bundle', require('./tasks/bundle'));
+var bundle = require('./tasks/bundle');
+
+gulp.task('bundle:source', function () {
+  return bundle(false);
+});
+
+gulp.task('bundle:min', function () {
+  return bundle(true);
+});
+
+gulp.task('bundle', ['bundle:source', 'bundle:min']);
+
 gulp.task('default', ['build']);
