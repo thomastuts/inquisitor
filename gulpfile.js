@@ -4,6 +4,7 @@ var bundle = require('./tasks/bundle');
 var bump = require('./tasks/bump-version');
 var git = require('./tasks/git');
 var runSequence = require('run-sequence');
+var argv = require('minimist')(process.argv.slice(2));
 
 gulp.task('bundle:source', function () {
   return bundle(false);
@@ -15,7 +16,9 @@ gulp.task('bundle:min', function () {
 
 gulp.task('bundle', ['bundle:source', 'bundle:min']);
 
-gulp.task('bump-version', bump);
+gulp.task('bump-version', function () {
+  return bump(argv.change);
+});
 
 gulp.task('commit-changes', git.commit);
 gulp.task('push-changes', git.push);
@@ -26,7 +29,7 @@ gulp.task('release', function (cb) {
     'bundle',
     'bump-version',
     'commit-changes',
-    //'push-changes',
+    'push-changes',
     'create-tag',
     function (err) {
       if (err) {
@@ -37,7 +40,7 @@ gulp.task('release', function (cb) {
       }
       cb(err);
     }
-  )
+  );
 });
 
 gulp.task('default', ['bundle']);

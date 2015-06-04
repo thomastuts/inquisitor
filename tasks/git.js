@@ -11,10 +11,10 @@ function getPackageJsonVersion () {
 }
 
 module.exports = {
-  commit: function (message) {
-    message = message || DEFAULT_COMMIT_MESSAGE + ' for ' + getPackageJsonVersion();
+  commit: function () {
+    var message = DEFAULT_COMMIT_MESSAGE + ' for ' + getPackageJsonVersion();
     return gulp.src('.')
-      .pipe(git.commit(message || DEFAULT_COMMIT_MESSAGE, {args: '-a'}));
+      .pipe(git.commit(message, {args: '-a'}));
   },
   push: function (cn) {
     git.push('origin', 'master', cb);
@@ -25,7 +25,7 @@ module.exports = {
       if (error) {
         return cb(error);
       }
-      //git.push('origin', 'master', {args: '--tags'}, cb);
+      git.push('origin', 'master', {args: '--tags'}, cb);
     });
   }
 };
