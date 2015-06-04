@@ -14,8 +14,6 @@ gulp.task('bundle:min', function () {
   return bundle(true);
 });
 
-gulp.task('bundle', ['bundle:source', 'bundle:min']);
-
 gulp.task('bump-version', function () {
   return bump(argv.change);
 });
@@ -26,7 +24,8 @@ gulp.task('create-tag', git.tag);
 
 gulp.task('release', function (cb) {
   runSequence(
-    'bundle',
+    'bundle:source',
+    'bundle:min',
     'bump-version',
     'commit-changes',
     'push-changes',
