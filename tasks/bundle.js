@@ -11,7 +11,6 @@ var gutil = require('gulp-util');
 
 var b = browserify({
   entries: ['./src/index.js'],
-  debug: true,
   standalone: 'Inquisitor'
 });
 
@@ -19,7 +18,7 @@ b.transform(babelify);
 b.on('log', gutil.log); // output build logs to terminal
 
 module.exports = function (minified) {
-  var filename = minified ? 'bundle.min.js' : 'bundle.js';
+  var filename = minified ? 'inquisitor.min.js' : 'inquisitor.js';
 
   return b.bundle()
     .on('error', gutil.log.bind(gutil, 'Browserify Error'))
