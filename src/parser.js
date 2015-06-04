@@ -1,6 +1,11 @@
 'use strict';
 
-const DEFAULT_PAIR_DELIMITER = ':';
+var assign = require('object-assign');
+
+const DEFAULT_OPTIONS = {
+  allowAllKeywords: false,
+  delimiter: ':'
+};
 
 class Parser {
   constructor(options) {
@@ -8,8 +13,7 @@ class Parser {
       throw new Error('No keys defined, either define pairs or allow all of them with `allowAllKeys`');
     }
 
-    this.options = options || {};
-    this.options.delimiter = this.options.delimiter || DEFAULT_PAIR_DELIMITER;
+    this.options = assign({}, DEFAULT_OPTIONS, options);
     this.regex = new RegExp('\\S+' + this.options.delimiter + '("[^"]+"|\\S+)', 'g');
   }
 
