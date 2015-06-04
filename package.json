@@ -24,6 +24,8 @@
     "browserify": "^9.0.8",
     "chai": "^2.3.0",
     "gulp": "^3.8.11",
+    "gulp-bump": "^0.3.1",
+    "gulp-git": "^1.2.4",
     "gulp-if": "^1.2.5",
     "gulp-uglify": "^1.2.0",
     "gulp-util": "^3.0.4",
@@ -35,6 +37,7 @@
     "karma-phantomjs-launcher": "^0.2.0",
     "mocha": "^2.2.5",
     "phantomjs": "^1.9.17",
+    "run-sequence": "^1.1.0",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0"
   }
