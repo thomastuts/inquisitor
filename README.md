@@ -1,105 +1,89 @@
 # Inquisitor
 
-**Inquisitor extracts expressions from a Gmail-like search string.** Expression values can optionally be transformed during parsing.
+**Inquisitor extracts key/value pairs from a string.**
 
 It turns this:
 
-`'age:50 name:"john doe" foo:BAR fruit:chiquita'`
+`'is:open is:issue author:"Thomas Tuts"'`
 
 into this:
 
 ```js
 {
-  age: 50,
-  name: 'John Doe',
-  foo: 'BAR',
-  fruit: 'chiquita bananas'
+  is: ['open', 'issue'],
+  author: 'Thomas Tuts'
 }
 ```
-
-## How does it work?
-Inquisitor has two major concepts: **expressions** and **transformers**. An expression is declared with a keyword and a value, e.g. `foo:bar`. This expression is parsed and added to the final result. A transformer optionally transforms the expression value when it is added to the result. An example of a transformer would be to convert the value to a number, to capitalize it, ...
 
 ## Usage
 
 ### Install
-* Get the dependency:
-  * `$ bower install --save thomastuts/inquisitor`
-* Include the dependency in your HTML file:
-  * `<script src="bower_components/inquisitor/dist/inquisitor.js"></script>`
-  * ...or
-  * `<script src="bower_components/inquisitor/dist/inquisitor.min.js"></script>`
 
-### Configure
-Two Inquisitor components can be configured: expression sets and custom transformers.
+**Bower**: `$ bower install --save thomastuts/inquisitor`
 
-#### Adding expressions
-Before Inquisitor can parse your search strings, you'll need to let it know which keywords to parse, and to optionally transform their value using either a preset or a custom transformer (referenced by name):
+**npm**: `$ npm install --save thomastuts-inquisitor`
+
+Inquisitor can be used as either a CommonJS module, or as a standalone global variable to use in the browser (`Inquisitor`).
+
+### Creating a parser
+To create a parser, simply call `Inquisitor.createParser()` and pass in the options (see below for a full list). 
+
 ```js
-Inquisitor.addExpressionSet('myFirstExpressionSet', [
-  {
-    keyword: 'age',
-    transform: 'number' // preset transformer
-  },
-  {
-    keyword: 'name',
-    transform: 'capitalized' // preset transformer
-  },
-  {
-    keyword: 'foo' // no transformer, use value as-is
-  },
-  {
-    keyword: 'fruit',
-    transform: 'bananas' // custom transformer
-  }
-]);
-```
-Expressions are contained in *expression sets*. This way we can define multiple batches of keywords, allowing us to parse multiple versions of search strings.
-
-#### Adding custom transformers
-As mentioned before, you can optionally transform expression values when they are added to the Inquisitor result. This is handy for turning values into numbers, capitalizing them, ...
-```js
-Inquisitor.addTransformer('bananas', function (input) {
-  return input + ' bananas';
+var parser = Inquisitor.createParser({
+  pairs: [
+    {
+      key: 'foo'
+    },
+    {
+      key: 'bar'
+    }
+  ]
 });
 ```
-In this example, any keyword that uses the custom `bananas` transformer will have `' bananas'` appended to its value.
 
-### Parsing expressions
-Use `Inquisitor.parse()` method to parse your search strings and get the result.
-
-```js
-Inquisitor.parse('myFirstExpressionSet', 'age:50 name:"john doe" foo:BAR fruit:chiquita');
-```
-The returned result in this example would be:
+### Parsing a string
+To parse a string using the parser you created, call `parser.parse(input)`.
 
 ```js
-{
-  age: 50, // number transformer
-  name: 'John Doe', // capitalized transformer
-  foo: 'BAR', // no transformer
-  fruit: 'chiquita bananas' // custom transformer
-}
+parser.parse('foo:one bar:two'); // result is {foo: 'one', bar: 'two'}
 ```
 
-## API
-#### `Inquisitor.addExpressionSet(name, expressionSet)`
-Parameter      | Type          | Details
--------------- | ------------- |-------------
-name           | String        | Used to identify which expression set to use when parsing a search string.
-expressionSet  | Array         | A collection of expressions, with a required `keyword` property and an optional `transformer` property.
+## Options
+There are two kinds of options: options for the entire parser, and options for a specific key/value pair.
 
-#### `Inquisitor.addTransformer(name, transformer)`
-Parameter      | Type          | Details
--------------- | ------------- |-------------
-name           | String        | Used to identify the transformer.
-transformer    | Function      | An anonymous function that takes one argument (the value), transforms it and then returns it.
+### Parser options
+#### `pairs` (Array)
+`pairs` should be an array of objects containing the 'key' property and any pair options (see below). By default, only key/value pairs that are defined in `pairs` are added to the result, unless `allowAllKeys` is set to `true` (see below).
+
+```js
+var parser = Inquisitor.createParser({
+  pairs: [
+    {
+      key: 'foo',
+      multipleValues: true
+    },
+    {
+      key: 'bar'
+    }
+  ]
+});
+```
+
+#### `allowAllKeys` (Boolean)
+If `allowAllKeys` is set to true, the parser will add any key/value pair to the result, regardless of them being defined in `pairs` or not (the defined ones will still use their configuration if you have passed in options for that pair).
+
+#### `delimiter` (String)
+Changes the delimiter that separates the key from the value.
+
+### Pair options
+#### `multipleValues`
+If `multipleValues` is set to `true`, the result for that key will have an array of values instead of a string.
 
 ## License
 
 The MIT License (MIT)
 
-Copyright (c) 2014 Thomas Tuts
+Copyright (c) 2015 Thomas Tuts
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

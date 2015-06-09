@@ -1,44 +1,49 @@
 var gulp = require('gulp');
-var uglify = require('gulp-uglify');
-var rename = require('gulp-rename');
-var karma = require('gulp-karma');
-var runSequence =  require('run-sequence');
 
-var paths = {
-  inquisitor: 'src/inquisitor.js',
-  dist: 'dist/'
-};
+var bundle = require('./tasks/bundle');
+var bump = require('./tasks/bump-version');
+var git = require('./tasks/git');
+var npm = require('./tasks/npm');
+var runSequence = require('run-sequence');
+var argv = require('minimist')(process.argv.slice(2));
 
-gulp.task('test', function() {
-  // A non-existing file is used here since the files are being loaded through the Karma config file
-  return gulp.src('./idontexist')
-    .pipe(karma({
-      configFile: 'karma.conf.js',
-      action: 'run'
-    }))
-    .on('error', function(err) {
-      throw err;
-    });
+gulp.task('bundle:source', function () {
+  return bundle(false);
 });
 
-gulp.task('inquisitor-dist', function () {
-  return gulp.src(paths.inquisitor)
-    .pipe(gulp.dest(paths.dist));
+gulp.task('bundle:min', function () {
+  return bundle(true);
 });
 
-gulp.task('inquisitor-min-dist', function () {
-  return gulp.src(paths.inquisitor)
-    .pipe(uglify())
-    .pipe(rename({
-      basename: 'inquisitor.min'
-    }))
-    .pipe(gulp.dest(paths.dist));
+gulp.task('bump-version', function () {
+  return bump(argv.change);
 });
 
-gulp.task('build', function (callback) {
-  runSequence('test', ['inquisitor-dist', 'inquisitor-min-dist'], callback)
+gulp.task('commit-changes', git.commit);
+gulp.task('push-changes', git.push);
+gulp.task('create-tag', git.tag);
+
+gulp.task('npm-publish', npm.publish);
+
+gulp.task('release', function (cb) {
+  runSequence(
+    'bundle:source',
+    'bundle:min',
+    'bump-version',
+    'commit-changes',
+    'push-changes',
+    'create-tag',
+    'npm-publish',
+    function (err) {
+      if (err) {
+        console.log(err.message);
+      }
+      else {
+        console.log('Release finished successfully!');
+      }
+      cb(err);
+    }
+  );
 });
 
-gulp.task('bundle', require('./tasks/bundle'));
-
-gulp.task('default', ['build']);
+gulp.task('default', ['bundle']);
