@@ -1,6 +1,6 @@
 {
   "name": "inquisitor",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Inquisitor extracts expressions from a Gmail-like search string.",
   "main": "dist/inquisitor.js",
   "directories": {
