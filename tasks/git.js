@@ -16,7 +16,7 @@ module.exports = {
     return gulp.src('.')
       .pipe(git.commit(message, {args: '-a'}));
   },
-  push: function (cn) {
+  push: function (cb) {
     git.push('origin', 'master', cb);
   },
   tag: function (cb) {
