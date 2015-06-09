@@ -1,5 +1,5 @@
 {
-  "name": "inquisitor",
+  "name": "thomastuts-inquisitor",
   "version": "0.0.5",
   "description": "Inquisitor extracts expressions from a Gmail-like search string.",
   "main": "dist/inquisitor.js",
