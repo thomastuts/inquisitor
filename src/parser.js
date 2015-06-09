@@ -17,6 +17,12 @@ class Parser {
     this.regex = new RegExp('\\S+' + this.options.delimiter + '("[^"]+"|\\S+)', 'g');
   }
 
+  /**
+   * Retrieves the options for a specific key if there are any.
+   *
+   * @param key
+   * @returns {*}
+   */
   getOptionsForKey(key) {
     for (var i = 0; i < this.options.pairs.length; i++) {
       var keywordOptions = this.options.pairs[i];
@@ -26,6 +32,13 @@ class Parser {
     }
   }
 
+  /**
+   * Parses an input string and extracts either the defined key/value pairs from the string, or all of them depending on
+   * the parser options on initialisation.
+   *
+   * @param input
+   * @returns {{}}
+   */
   parse(input) {
     var keyValuePairs = input.match(this.regex);
     var result = {};
