@@ -1,6 +1,6 @@
 {
   "name": "thomastuts-inquisitor",
-  "version": "0.0.5",
+  "version": "1.0.0",
   "description": "Inquisitor extracts expressions from a Gmail-like search string.",
   "main": "dist/inquisitor.js",
   "directories": {
