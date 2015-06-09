@@ -19,11 +19,11 @@ into this:
 
 ### Install
 
-#### Bower
-`$ bower install --save thomastuts/inquisitor`
+**Bower**: `$ bower install --save thomastuts/inquisitor`
 
-#### npm
-`$ npm install --save thomastuts-inquisitor`
+**npm**: `$ npm install --save thomastuts-inquisitor`
+
+Inquisitor can be used as either a CommonJS module, or as a standalone global variable to use in the browser (`Inquisitor`).
 
 ### Creating a parser
 To create a parser, simply call `Inquisitor.createParser()` and pass in the options (see below for a full list). 
